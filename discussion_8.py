@@ -25,24 +25,29 @@ def getAdmissionsInfo2019(soup):
     table = soup.find('table', class_="toccolours")
     td_list = table.find_all('td')
 
-    schools = []
-    for td in td_list:
-        school = td.find('a')
-        if school != None:
-            schools.append(school.text)
-    schools = schools[1:]
 
     td_years_list = table.find_all('td', style="text-align:center;")[1:]
     years = []
     for year in td_years_list:
         year = year.text.strip()
         years.append(year)
+
+    schools = []
+    for td in td_list:
+        if td not in td_years_list and td != None:
+            schools.append(td.text)
+    schools = schools[2:]
     
     d = {}
     for index in range(len(schools)):
         d[schools[index]] = years[index]
-    return d
+    
+    sorted_d = {}
+    for key in sorted(list(d.keys())[2:]):
+        sorted_d[key] = d[key]
+    return sorted_d
 
+print(getAdmissionsInfo2019(soup))
 
 def main():
     # Task 1: Create a BeautifulSoup object and name it soup. Refer to discussion slides or lecture slides to complete this

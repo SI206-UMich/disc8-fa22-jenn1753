@@ -2,9 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import unittest
 
-url = 'https://en.wikipedia.org/wiki/University_of_Michigan'
-r = requests.get(url)
-soup = BeautifulSoup(r.content, 'html.parser')
+
 
 # Task 2: Look at the Get the URL that links to webpage of universities with Olympic medal wins
 # search for the url in the University of Michgian wikipedia page (in the third pargraph of the intro)
@@ -47,7 +45,6 @@ def getAdmissionsInfo2019(soup):
         sorted_d[key] = d[key]
     return sorted_d
 
-print(getAdmissionsInfo2019(soup))
 
 def main():
     # Task 1: Create a BeautifulSoup object and name it soup. Refer to discussion slides or lecture slides to complete this
